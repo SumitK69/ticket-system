@@ -1,5 +1,4 @@
 import React from "react";
-import MyForm from "./form";
 import HonoCompoment from "./honoComponent";
 function App() {
   HonoCompoment();
