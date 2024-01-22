@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import sql from "./config/database";
-import SendMail from "./sendMail";
+import HonoCompoment from "./honoComponent";
 
 const MyForm = () => {
   // State variables to store the content of the text areas
@@ -17,19 +16,8 @@ const MyForm = () => {
 
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (emailRegex.test(UserID)) {
-      await sql(
-        `INSERT INTO complaint_table (unique_id,created_at,created_time,user_id,complaint_text) VALUES (DEFAULT,NOW(),CAST(NOW() AS timestamptz)AT TIME ZONE 'Asia/Kolkata','${UserID}','${ComplaintText}') RETURNING *`
-      ).then((res) => {
-        SendMail(res[0]);
-        // let insertedValue = res[0]["unique_id"];
-        // console.log("insertedValue", insertedValue);
-      });
-      // const data = {
-      //   email: UserID,
-      // };
-      // const response = await axios.post("http://localhost:5000/api", data);
-      // console.log("data", response.data);
-      alert("data is inserted in table");
+      HonoCompoment(UserID, ComplaintText);
+      alert("your complaint is submitted");
     } else {
       alert("enter valid email!");
     }
